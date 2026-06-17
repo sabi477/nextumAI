@@ -27,7 +27,7 @@ const OPTIONS: { value: Path; icon: string; title: string; desc: string }[] = [
 export function Step1Path({ state, update, onNext }: Props) {
   return (
     <StepShell
-      eyebrow="Adım 1 / 4"
+      eyebrow="Adım 1 / 5"
       title="Bu sistemi nasıl kullanacaksın?"
       subtitle="Seçimine göre seni doğru akışa yönlendireceğiz."
     >

@@ -7,6 +7,7 @@ import { Step0Email } from "@/components/onboarding/Step0Email";
 import { Step1Path } from "@/components/onboarding/Step1Path";
 import { Step2Company } from "@/components/onboarding/Step2Company";
 import { Step3Problems } from "@/components/onboarding/Step3Problems";
+import { StepSurvey } from "@/components/onboarding/StepSurvey";
 import { Step2Employee } from "@/components/onboarding/Step2Employee";
 import { StepSuccess } from "@/components/onboarding/StepSuccess";
 import { INITIAL_STATE, OnboardingState } from "@/components/onboarding/types";
@@ -16,15 +17,16 @@ type Screen =
   | "path"
   | "company-info"
   | "company-problems"
+  | "company-survey"
   | "employee-join"
   | "success";
 
 function getProgress(screen: Screen, path: string | null): { current: number; total: number } {
   if (path === "company") {
     const map: Record<string, number> = {
-      email: 1, path: 2, "company-info": 3, "company-problems": 4, success: 4,
+      email: 1, path: 2, "company-info": 3, "company-problems": 4, "company-survey": 5, success: 5,
     };
-    return { current: map[screen] ?? 1, total: 4 };
+    return { current: map[screen] ?? 1, total: 5 };
   }
   const map: Record<string, number> = {
     email: 1, path: 2, "employee-join": 3, success: 3,
@@ -53,13 +55,15 @@ export default function OnboardingPage() {
       path: "email",
       "company-info": "path",
       "company-problems": "company-info",
+      "company-survey": "company-problems",
       "employee-join": "path",
     };
     const p = prev[screen];
     if (p) go(p);
   };
 
-  const showBack = screen !== "email" && screen !== "success";
+  // Anket adımı kendi "Geri" düğmesini barındırır (bölümler arası gezinme).
+  const showBack = screen !== "email" && screen !== "success" && screen !== "company-survey";
   const { current, total } = getProgress(screen, state.path);
 
   return (
@@ -129,7 +133,15 @@ export default function OnboardingPage() {
             <Step3Problems
               state={state}
               update={update}
-              onNext={() => go("success")}
+              onNext={() => go("company-survey")}
+            />
+          )}
+          {screen === "company-survey" && (
+            <StepSurvey
+              state={state}
+              update={update}
+              onSubmit={() => go("success")}
+              onBack={() => go("company-problems")}
             />
           )}
           {screen === "employee-join" && (

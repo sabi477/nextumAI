@@ -29,7 +29,7 @@ export function Step2Company({ state, update, onNext }: Props) {
 
   return (
     <StepShell
-      eyebrow="Adım 2 / 4"
+      eyebrow="Adım 2 / 5"
       title="Şirketini tanıyalım."
       subtitle="Analizin doğruluğu bu bilgilere dayanır."
     >

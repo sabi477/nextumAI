@@ -32,7 +32,7 @@ export function Step3Problems({ state, update, onNext }: Props) {
 
   return (
     <StepShell
-      eyebrow="Adım 3 / 4"
+      eyebrow="Adım 3 / 5"
       title="En büyük zorluklarını seç."
       subtitle="En fazla 3 alan seç. Analizin bu alanlara odaklanacak."
     >
@@ -87,7 +87,7 @@ export function Step3Problems({ state, update, onNext }: Props) {
         className="h-14 w-full rounded-xl font-semibold text-base transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg"
         style={{ backgroundColor: "var(--text)", color: "white" }}
       >
-        Analizi Başlat →
+        Devam Et →
       </button>
     </StepShell>
   );

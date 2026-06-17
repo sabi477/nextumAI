@@ -8,6 +8,8 @@ export interface OnboardingState {
   sector: string;
   size: string;
   problems: string[];
+  // Teşhis anketi cevapları — Q_ID -> 1-5 puan
+  surveyAnswers: Record<string, number>;
   // Path B — employee
   companyCode: string;
   role: string;
@@ -21,6 +23,7 @@ export const INITIAL_STATE: OnboardingState = {
   sector: "",
   size: "",
   problems: [],
+  surveyAnswers: {},
   companyCode: "",
   role: "",
   department: "",

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { OnboardingState } from "./types";
+import { SURVEY_QUESTION_COUNT } from "./surveyQuestions";
 
 interface Props {
   state: OnboardingState;
@@ -9,6 +10,7 @@ interface Props {
 
 export function StepSuccess({ state }: Props) {
   const isCompany = state.path === "company";
+  const answeredCount = Object.keys(state.surveyAnswers ?? {}).length;
 
   return (
     <div className="w-full max-w-lg mx-auto flex flex-col items-center text-center gap-8">
@@ -56,6 +58,7 @@ export function StepSuccess({ state }: Props) {
             { label: "Şirket", value: state.companyName },
             { label: "Sektör", value: state.sector },
             { label: "Çalışan", value: state.size },
+            { label: "Teşhis Anketi", value: `${answeredCount}/${SURVEY_QUESTION_COUNT} yanıt` },
           ].map((r) => (
             <div key={r.label} className="flex items-center justify-between">
               <span className="text-sm" style={{ color: "var(--text-muted)" }}>{r.label}</span>
